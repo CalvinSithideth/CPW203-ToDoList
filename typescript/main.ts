@@ -46,6 +46,43 @@ function processNewItem() {
     clearForm();
 }
 
+function clearForm():void {
+    // We could alternatively, wrap all inputs in
+    // a <form> and reset the form
+
+    // Clear all textboxes and textarea
+    let textElements = document.querySelectorAll("input[type=text], textarea")
+    for (let i = 0; i < textElements.length; i++) {
+        (<HTMLInputElement>textElements[i]).value = "";
+        
+    }
+
+    // Uncheck is complete
+    let isCompleteBox = <HTMLInputElement> document.querySelector("#is-complete");
+    isCompleteBox.checked = false;
+
+    // Reset select list
+    let urgencyList = <HTMLSelectElement> document.querySelector("#urgency");
+    urgencyList.selectedIndex = 0;
+
+}
+
+function notifyUser():void {
+    alert("Your item was saved");
+}
+
+function saveItem(item:ToDoItem):void {
+
+    let data:string = JSON.stringify(ToDoItem);
+    console.log("Converting ToDoItem into JSON string...");
+    console.log(data);
+
+    // ensure user can use localStorage
+    if (typeof(Storage) != "undefined") {
+        localStorage.setItem("todo", data);
+    }
+}
+
 /**
  * Get all user input from Form
  * and wrap it in a ToDoItem
@@ -70,9 +107,4 @@ function getItemFromForm():ToDoItem {
     return item;
 }
 
-function saveItem(item:ToDoItem):void {
-    // ensure user can use localStorage
-    if (typeof(Storage) != "undefined") {
-        localStorage.setItem("todo", item.title);
-    }
-}
+
