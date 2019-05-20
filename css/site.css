@@ -1,1 +1,15 @@
 
+div#todo-list > p, p.completed { /* ToDo Items */
+    background-color: green;
+    color: white;
+    padding: .5em;
+    border-radius: .2em;
+    display: inline-block;
+    margin-right: .75em;
+}
+
+p.completed { /* Completed ToDo Items */
+    text-decoration: line-through;
+    background-color: lightgreen !important /* Override background color with !important */;
+}
+
