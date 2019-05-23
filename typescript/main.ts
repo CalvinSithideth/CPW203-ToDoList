@@ -93,9 +93,9 @@ function clearForm():void {
     let isCompleteBox = <HTMLInputElement> document.querySelector("#is-complete");
     isCompleteBox.checked = false;
 
-    // Reset select list
-    let urgencyList = <HTMLSelectElement> document.querySelector("#urgency");
-    urgencyList.selectedIndex = 0;
+    // Reset radio button
+    let urgencyLow = <HTMLInputElement> document.querySelector("#urgencyLow");
+    urgencyLow.checked = true;
 
 }
 
@@ -112,6 +112,18 @@ function saveItem(item:ToDoItem):void {
     // ensure user can use localStorage
     if (typeof(Storage) != "undefined") {
         localStorage.setItem(itemKey, data);
+    }
+}
+
+function getUrgencyFromForm(formID:string):string {
+    let urgencyRadioButtons = document.querySelectorAll("input[type=text], textarea")
+    
+
+    // Loop through URGENCY radio buttons. Return string value of checked button
+    for (let button = 0; button < urgencyRadioButtons.length; button++) {
+        if ( (<HTMLInputElement> urgencyRadioButtons[button]).checked ) {
+            return (<HTMLInputElement> urgencyRadioButtons[button]).value;
+        }
     }
 }
 
@@ -133,8 +145,14 @@ function getItemFromForm():ToDoItem {
 
     item.isComplete = (<HTMLInputElement> document.getElementById("is-complete")).checked;
 
+    // TODO: CHANGE TO WORK FOR RADIO BUTTONS
+    item.urgency = getUrgencyFromForm("create-item");
+
+
+    /* old code
     let urgencyElem = <HTMLSelectElement> document.getElementById("urgency");
     item.urgency = urgencyElem.options[urgencyElem.selectedIndex].text;
+    */
 
     return item;
 }

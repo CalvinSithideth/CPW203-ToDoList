@@ -44,8 +44,8 @@ function clearForm() {
     }
     var isCompleteBox = document.querySelector("#is-complete");
     isCompleteBox.checked = false;
-    var urgencyList = document.querySelector("#urgency");
-    urgencyList.selectedIndex = 0;
+    var urgencyLow = document.querySelector("#urgencyLow");
+    urgencyLow.checked = true;
 }
 function notifyUser() {
     alert("Your item was saved");
@@ -58,6 +58,14 @@ function saveItem(item) {
         localStorage.setItem(itemKey, data);
     }
 }
+function getUrgencyFromForm(formID) {
+    var urgencyRadioButtons = document.querySelectorAll("input[type=text], textarea");
+    for (var button = 0; button < urgencyRadioButtons.length; button++) {
+        if (urgencyRadioButtons[button].checked) {
+            return urgencyRadioButtons[button].value;
+        }
+    }
+}
 function getItemFromForm() {
     var item = new ToDoItem();
     item.title = document.getElementById("title").value;
@@ -67,7 +75,6 @@ function getItemFromForm() {
     var itemEndDate = document.getElementById("end-date").value;
     item.endDate = new Date(itemEndDate);
     item.isComplete = document.getElementById("is-complete").checked;
-    var urgencyElem = document.getElementById("urgency");
-    item.urgency = urgencyElem.options[urgencyElem.selectedIndex].text;
+    item.urgency = getUrgencyFromForm("create-item");
     return item;
 }

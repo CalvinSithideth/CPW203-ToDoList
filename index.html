@@ -16,7 +16,7 @@
 	<header>
 		<h1>Create your ToDo List</h1>
 	</header>
-	
+
 	<form id="create-item">
 		<label for="title">Title: </label>
 		<input id="title" type="text">
@@ -42,13 +42,23 @@
 		<input id="is-complete" type="checkbox">
 		<br>
 
-		<label for="urgency">Choose an urgency:</label>
+		<label for="">Choose an urgency:</label>
+		<input type="radio" name="urgency" value="L" id="urgencyLow" checked>
+		<label for="urgencyLow">Low</label>
+		<input type="radio" name="urgency" value="M" id="urgencyMedium">
+		<label for="urgencyMedium">Medium</label>
+		<input type="radio" name="urgency" value="H" id="urgencyHigh">
+		<label for="urgencyHigh">High</label>
+		<br>
+
+		<!--
 		<select id="urgency">
 			<option value="L">Low</option>
 			<option value="M">Medium</option>
 			<option value="H">High</option>
 		</select>
 		<br>
+		-->
 
 		<button type="button">Add ToDo Item</button>
 	</form>
